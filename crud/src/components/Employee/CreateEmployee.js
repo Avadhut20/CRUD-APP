@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import supabase from '../../Supabase';
-import { Button, Container, Row, Col, Form } from 'react-bootstrap';
+import { Button, Container,  Form } from 'react-bootstrap';
 
 export const CreateEmployee = () => {
   const [newEmployee, setNewEmployee] = useState('');

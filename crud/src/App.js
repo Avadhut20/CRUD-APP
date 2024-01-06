@@ -14,6 +14,9 @@ import CreateProject from './components/Project/CreateProject';
 import DeleteProject from './components/Project/DeleteProject';
 import UpdateProject from './components/Project/UpdateProject';
 import ReadProject from './components/Project/ReadProject';
+import UpdateEmployee from './components/Employee/UpdateEmployee';
+import DeleteEmployee from './components/Employee/DeleteEmployee';
+import { JoinTables } from './components/JoinTables';
 
 const App = () => {
   return (
@@ -27,7 +30,7 @@ const App = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/">
-                Home
+              JoinTables
               </Nav.Link>
 
               {/* First Dropdown */}
@@ -54,20 +57,31 @@ const App = () => {
                 <NavDropdown.Item as={Link} to="/CreateEmployee">
                   Create
                 </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/UpdateEmployee">
+                  Update
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/DeleteEmployee">
+                  Delete
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
 
         <Routes>
+          <Route path="/" element={<JoinTables />} />
           <Route path="/ReadEmployee" element={<ReadEmployee />} />
           <Route path="/CreateEmployee" element={<CreateEmployee />} />
+          <Route path="/UpdateEmployee" element={<UpdateEmployee />} />
+          <Route path="/DeleteEmployee" element={<DeleteEmployee />} />
           <Route path="/ReadProject" element={<ReadProject />} />
           <Route path="/CreateProject" element={<CreateProject />} />
           <Route path="/DeleteProject" element={<DeleteProject />} />
           <Route path="/UpdateProject" element={<UpdateProject />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
+        
+        
       </>
     </Router>
   );
