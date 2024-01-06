@@ -1,34 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import supabase from '../../Supabase';
+import { Container, Table } from 'react-bootstrap';
 
-export const ReadProject = () => {
-  const [projects, setProjects] = useState([]);  // Initialize state with an empty array
+ const ReadProject = () => {
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const { data } = await supabase.from('projects').select('*').order('id');
-      
-        
-        setProjects(data);  // Ensure data is an array, or set an empty array if data is falsy
+        setProjects(data || []);
       } catch (error) {
         console.log('Error while fetching projects', error.message);
       }
     };
 
     fetchProjects();
-  }, []);  // Empty dependency array to run the effect only once
+  }, []);
 
   return (
-    <div>
+    <Container>
       <h2>Projects</h2>
-      <ul>
-
-        {projects.map(project => (
-          <li key={project.id}>{project.id}:{project.name}</li>
-        ))}
-      </ul>
-      
-    </div>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {projects.map((project) => (
+            <tr key={project.id}>
+              <td>{project.id}</td>
+              <td>{project.name}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </Container>
   );
 };
+export default ReadProject;

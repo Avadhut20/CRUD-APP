@@ -1,36 +1,61 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import supabase from '../../Supabase';
+import { Container, Form, Button } from 'react-bootstrap';
 
-export const UpdateProject = () => {
-    const [projectId, setProjectId]=useState('')
-    const [newprojectName, setNewProjectName]=useState('')
-    
-        const handleUpdate= async()=>{
-            const data= await supabase.
-            from("projects")
-            .upsert
-            (
-                [
-                    {
+  const UpdateProject = () => {
+  const [projectId, setProjectId] = useState('');
+  const [newprojectName, setNewProjectName] = useState('');
 
-                        id:projectId,
-                        name:newprojectName
-                    }
-
-                ],
-                { onConflict: ['id'] } 
-            )
-            console.log(data)
-            setProjectId('');
-            setNewProjectName('');
-        }
+  const handleUpdate = async () => {
+    try {
+      const data = await supabase
+        .from('projects')
+        .upsert(
+          [
+            {
+              id: projectId,
+              name: newprojectName,
+            },
+          ],
+          { onConflict: ['id'] }
+        );
+      console.log(data);
+      setProjectId('');
+      setNewProjectName('');
+    } catch (error) {
+      console.error('Error updating project:', error.message);
+    }
+  };
 
   return (
-    <div>
-        <h2>Update</h2>
-        <input type="text" placeholder="Enter id "value={projectId} onChange={(e)=>setProjectId(e.target.value)}/>
-        <input type="text" placeholder="Enter name "value={newprojectName} onChange={(e)=>setNewProjectName(e.target.value)}/>
-        <button onClick={handleUpdate}> Update</button>
-    </div>
-  )
-}
+    <Container>
+      <h2>Update Project</h2>
+      <Form>
+        <Form.Group controlId="projectId">
+          <Form.Label>Project ID</Form.Label>
+          <Form.Control
+            type="text"
+            value={projectId}
+            placeholder="Enter Project ID"
+            onChange={(e) => setProjectId(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="newprojectName">
+          <Form.Label>New Project Name</Form.Label>
+          <Form.Control
+            type="text"
+            value={newprojectName}
+            placeholder="Enter New Project Name"
+            onChange={(e) => setNewProjectName(e.target.value)}
+          />
+        </Form.Group>
+
+        <Button variant="primary" className='mt-4' onClick={handleUpdate}>
+          Update
+        </Button>
+      </Form>
+    </Container>
+  );
+};
+export default UpdateProject;
