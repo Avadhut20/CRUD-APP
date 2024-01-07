@@ -21,8 +21,8 @@ Welcome to the React and Supabase CRUD App project! This app showcases a dynamic
    ```bash
    git clone https://github.com/Avadhut20/CRUD-APP 
 2. Directory:
-		 ```bash
-    cd crud ```
+	```bash
+    cd crud
 4.  Install dependencies:
     
     ```bash
@@ -30,7 +30,7 @@ Welcome to the React and Supabase CRUD App project! This app showcases a dynamic
 5.  Run the app:
     
     ```bash
-    `npm start` 
+    npm start
 6.  Explore and enjoy the app's functionalities!
     
 
